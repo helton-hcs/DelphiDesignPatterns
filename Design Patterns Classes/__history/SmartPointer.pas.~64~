@@ -1,0 +1,61 @@
+unit SmartPointer;
+
+interface
+
+uses
+  SysUtils;
+
+type
+  TSmartPointer<T: constructor> = record
+  strict private
+    class var
+      FInstance: T;
+  private
+    class function GetInstance: T; static;
+  public
+    class function New: T; static;
+    constructor Create(const aValue: T); overload;
+    class operator Implicit(const AValue: T): TSmartPointer<T>;
+    class property Instance: T read GetInstance;
+    class destructor Destroy;
+  end;
+
+implementation
+
+{ TSmartPointer<T> }
+
+//class function TSmartPointer<T>.Create: T;
+//begin
+//  FInstance := GetInstance;
+//end;
+
+constructor TSmartPointer<T>.Create(const aValue: T);
+begin
+  FInstance := aValue;
+end;
+
+class destructor TSmartPointer<T>.Destroy;
+begin
+  if Assigned(PPointer(@FInstance)^) then
+    FreeAndNil(FInstance);
+  inherited;
+end;
+
+class function TSmartPointer<T>.GetInstance: T;
+begin
+  if not Assigned(PPointer(@FInstance)^) then
+    FInstance := T.Create;
+  Result := FInstance;
+end;
+
+class operator TSmartPointer<T>.Implicit(const AValue: T): TSmartPointer<T>;
+begin
+  Result := TSmartPointer<T>.Create(AValue);
+end;
+
+class function TSmartPointer<T>.New: T;
+begin
+  Result := Instance;
+end;
+
+end.

@@ -1,0 +1,14 @@
+program FormFactoryBuilder;
+
+uses
+  FMX.Forms,
+  FormDecorator.Classes in '..\Source\FormDecorator.Classes.pas',
+  Unit1 in 'Unit1.pas';
+
+{$R *.res}
+
+begin
+  ReportMemoryLeaksOnShutdown := True;
+  Application.Initialize;
+  Application.Run;
+end.

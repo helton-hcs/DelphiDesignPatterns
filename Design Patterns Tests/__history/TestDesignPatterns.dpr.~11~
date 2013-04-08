@@ -1,0 +1,17 @@
+program TestDesignPatterns;
+
+uses
+  GUITestRunner,
+  DesignPatternsTests in 'DesignPatternsTests.pas',
+  Strategy.Classes in '..\Design Patterns Classes\Strategy.Classes.pas',
+  Observer.Classes in '..\Design Patterns Classes\Observer.Classes.pas',
+  Factory.Classes in '..\Design Patterns Classes\Factory.Classes.pas',
+  Singleton.Classes in '..\Design Patterns Classes\Singleton.Classes.pas',
+  SmartPointer in '..\Design Patterns Classes\SmartPointer.pas';
+
+{$R *.res}
+
+begin
+  ReportMemoryLeaksOnShutdown := True;
+  TGUITestRunner.runRegisteredTests;
+end.

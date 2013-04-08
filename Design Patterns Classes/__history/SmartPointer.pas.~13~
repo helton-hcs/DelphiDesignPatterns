@@ -1,0 +1,39 @@
+unit SmartPointer;
+
+interface
+
+type
+  SmartPointer<T: class, constructor> = class(TInterfacedObject)
+  strict private
+    FInstance: T;
+  public
+    constructor Create; reintroduce;
+    destructor Destroy; override;
+    function GetInstance: T;
+  end;
+
+implementation
+
+uses
+  System.Rtti;
+
+{ SmartPointer<T> }
+
+constructor SmartPointer<T>.Create;
+begin
+  inherited;
+  FInstance := T.Create;
+end;
+
+destructor SmartPointer<T>.Destroy;
+begin
+  FInstance.Free;
+  inherited;
+end;
+
+function SmartPointer<T>.GetInstance: T;
+begin
+  Result := FInstance;
+end;
+
+end.

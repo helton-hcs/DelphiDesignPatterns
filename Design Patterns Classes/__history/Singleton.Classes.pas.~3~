@@ -1,0 +1,25 @@
+unit Singleton.Classes;
+
+interface
+
+type
+  TSingleton<T: class, constructor> = class
+  strict private
+    FInstance: T;
+  private
+    function GetInstance: T;
+  public
+    property GetInstance: T read GetInstance;
+  end;
+
+implementation
+
+{ TSingleton<T> }
+
+function TSingleton<T>.GetInstance: T;
+begin
+  if not Assigned(FInstance) then
+    FInstance := T.Create;
+end;
+
+end.

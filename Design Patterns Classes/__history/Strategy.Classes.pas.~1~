@@ -1,0 +1,104 @@
+unit Strategy.Classes;
+
+interface
+
+uses
+  System.SysUtils;
+
+type
+  ISSEncryption = interface
+    function GetEncryptionId: String;
+    function Encrypt(AValue: String): String;
+  end;
+
+  TSSNoEncryption = class(TInterfacedObject, ISSEncryption)
+    function GetEncryptionId: String;
+    function Encrypt(AValue: String): String;
+  end;
+
+  TSSEncryptionToUpper = class(TInterfacedObject, ISSEncryption)
+    function GetEncryptionId: String;
+    function Encrypt(AValue: String): String;
+  end;
+
+  TSSEncryptionToLower = class(TInterfacedObject, ISSEncryption)
+    function GetEncryptionId: String;
+    function Encrypt(AValue: String): String;
+  end;
+
+  TSSPassword = class(TObject, ISSEncryption)
+  private
+    FValue: String;
+    FSSEncryption: ISSEncryption;
+    function GetEncryption: ISSEncryption;
+  public
+    constructor Create(const AValue: String); reintroduce;
+    function GetEncryptedKey: String;
+    function GetEncryptionId: String;
+    property SSEncryption: ISSEncryption read GetEncryption write FSSEncryption implements ISSEncryption;
+    property Value: String read FValue write FValue;
+  end;
+
+implementation
+
+{ TSSPassword }
+
+constructor TSSPassword.Create(const AValue: String);
+begin
+  FValue := AValue;
+end;
+
+function TSSPassword.GetEncryption: ISSEncryption;
+begin
+  if not Assigned(FSSEncryption) then
+    FSSEncryption := TSSNoEncryption.Create;
+  Result := FSSEncryption;
+end;
+
+function TSSPassword.GetEncryptedKey: String;
+begin
+  Result := SSEncryption.Encrypt(Value);
+end;
+
+function TSSPassword.GetEncryptionId: String;
+begin
+  Result := SSEncryption.GetEncryptionId;
+end;
+
+{ TSSEncryption1 }
+
+function TSSEncryptionToUpper.Encrypt(AValue: String): String;
+begin
+  Result := AValue.ToUpper;
+end;
+
+function TSSEncryptionToUpper.GetEncryptionId: String;
+begin
+  Result := 'ToUpper encryption';
+end;
+
+{ TSSEncryption2 }
+
+function TSSEncryptionToLower.Encrypt(AValue: String): String;
+begin
+  Result := AValue.ToLower;
+end;
+
+function TSSEncryptionToLower.GetEncryptionId: String;
+begin
+  Result := 'ToLower encryption';
+end;
+
+{ TSSNoEncryption }
+
+function TSSNoEncryption.Encrypt(AValue: String): String;
+begin
+  Result := AValue;
+end;
+
+function TSSNoEncryption.GetEncryptionId: String;
+begin
+  Result := 'None encryption';
+end;
+
+end.

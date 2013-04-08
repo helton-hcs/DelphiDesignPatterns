@@ -1,0 +1,15 @@
+program TestDesignPatterns;
+
+uses
+  TestFramework,
+  GUITestRunner,
+  IWInit,
+  IWGlobal,
+  DesignPatternsTests in 'DesignPatternsTests.pas',
+  Strategy.Classes in '..\Design Patterns Classes\Strategy.Classes.pas';
+
+{$R *.res}
+
+begin
+  TGUITestRunner.runRegisteredTests;
+end.

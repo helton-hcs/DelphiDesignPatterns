@@ -1,0 +1,51 @@
+unit Main.Form;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Rtti, System.Classes,
+  System.Variants, FMX.Types, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.Edit,
+  FMX.Layouts, FMX.Grid, Data.DB, Datasnap.DBClient, Data.SqlExpr, FMX.Objects;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    ToolBar1: TToolBar;
+    Rectangle1: TRectangle;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+uses
+  FormDecorator.Classes;
+
+{$R *.fmx}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  FormCreator: ISSFormCreator;
+  Form: TForm;
+begin
+//  FormCreator := TSSDecoratorFormButtonEdit.Create(
+//                    TSSDecoratorFormToolbar.Create(
+//                       TSSDecoratorFormBackground.Create(
+//                          TSSDecoratorFormToolbar.Create(
+//                             TSSSimpleForm.Create))));
+  FormCreator := TSSFormBuilder.GetFormISSForm([TSSDecoratorFormButtonEdit,
+                                                TSSDecoratorFormToolbar,
+                                                TSSDecoratorFormBackground,
+                                                TSSDecoratorFormToolbar]);
+  Form := FormCreator.GetForm(nil, 'MyCaption');
+  Button1.Parent;
+  Form.Show;
+end;
+
+end.

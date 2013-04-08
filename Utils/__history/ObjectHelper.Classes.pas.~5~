@@ -1,0 +1,47 @@
+unit ObjectHelper.Classes;
+
+interface
+
+uses
+  Data.DBXJSON,
+  Data.DBXJSONReflect;
+
+type
+  TObjectHelper = class helper for TObject
+    function Clone: TObject; overload;
+    function Clone<T: class, constructor>(aValue: T): T; overload;
+  end;
+
+implementation
+
+{ TDeepCopyMaker }
+
+function TObjectHelper.Clone: TObject;
+var
+  MarshalObj: TJSONMarshal;
+  UnMarshalObj: TJSONUnMarshal;
+  JSONValue: TJSONValue;
+begin
+  Result:= nil;
+  MarshalObj := TJSONMarshal.Create;
+  UnMarshalObj := TJSONUnMarshal.Create;
+  try
+    JSONValue := MarshalObj.Marshal(Self);
+    try
+      if Assigned(JSONValue) then
+        Result:= UnMarshalObj.Unmarshal(JSONValue);
+    finally
+      JSONValue.Free;
+    end;
+  finally
+    MarshalObj.Free;
+    UnMarshalObj.Free;
+  end;
+end;
+
+function TObjectHelper.Clone<T>(aValue: T): T;
+begin
+  Result := T(aValue.Clone);
+end;
+
+end.

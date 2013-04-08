@@ -1,0 +1,229 @@
+unit Observer.Classes;
+
+interface
+
+uses
+  System.Classes, System.SysUtils, System.Generics.Defaults, System.Generics.Collections;
+
+type
+  TVideoOperation = (voInsert, voUpdate, voDelete);
+  TVideoType      = (vtComedy, vtGame, vtSports);
+  TSSVideoTypes     = set of TVideoType;
+
+  TSSVideo = class
+  strict private
+    FVideoName: String;
+    FVideoType: TVideoType;
+  public
+    constructor Create(aVideoName: String; aVideoType: TVideoType); reintroduce;
+    property VideoName: String read FVideoName;
+    property VideoType: TVideoType read FVideoType;
+    function ToString: String; override;
+  end;
+
+  ISSObserver = interface
+    ['{6406B5E8-D936-4DA5-8CF1-EF7668216A78}']
+    procedure Update(AVideo: TSSVideo; aVideoOperation: TVideoOperation);
+    function GetVideoTypePreferences: TSSVideoTypes;
+  end;
+
+  ISSSubject = interface
+    ['{469A7080-3A7E-4B69-9FEE-FE7B7CB6AB5A}']
+    procedure RegisterObserver(aObs: ISSObserver);
+    procedure UnregisterObserver(aObs: ISSObserver);
+    procedure NotifyObservers;
+  end;
+
+  TSSYouTube = class(TSingletonImplementation, ISSSubject)
+  strict private
+    FCurrentVideo: TSSVideo;
+    FCurrentVideoOperation: TVideoOperation;
+    FObservers: TList<ISSObserver>;
+    FVideosAvailable: TList<TSSVideo>;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    {ISSSubject}
+    procedure RegisterObserver(aObs: ISSObserver);
+    procedure UnregisterObserver(aObs: ISSObserver);
+    procedure NotifyObservers;
+
+    function AddVideo(const aVideo: TSSVideo): Boolean;
+    function RemoveVideo(const aVideo: TSSVideo): Boolean;
+    function GetVideosList: String;
+    property CurrentVideo: TSSVideo read FCurrentVideo;
+    property CurrentVideoOperation: TVideoOperation read FCurrentVideoOperation;
+    property Observers: TList<ISSObserver> read FObservers;
+    property VideosAvailable: TList<TSSVideo> read FVideosAvailable;
+  end;
+
+  TSSPerson = class(TSingletonImplementation, ISSObserver)
+  strict private
+    FName: String;
+    FVideos: TList<TSSVideo>;
+    FVideoTypePreferences: TSSVideoTypes;
+  private
+    function GetVideoTypePreferences: TSSVideoTypes;
+  public
+    constructor Create(aName: String; aVideoTypePreferences: TSSVideoTypes); reintroduce;
+    destructor Destroy; override;
+
+    { ISSObserver }
+    procedure Update(AVideo: TSSVideo; aVideoOperation: TVideoOperation);
+
+    function GetVideosList: String;
+    property Name: String read FName;
+    property Videos: TList<TSSVideo> read FVideos;
+    property VideoTypePreferences: TSSVideoTypes read GetVideoTypePreferences;
+  end;
+
+implementation
+
+uses
+  System.StrUtils, System.TypInfo;
+
+{ TSSYouTube }
+
+constructor TSSYouTube.Create;
+begin
+  inherited;
+  FObservers       := TList<ISSObserver>.Create;
+  FVideosAvailable := TList<TSSVideo>.Create;
+end;
+
+destructor TSSYouTube.Destroy;
+
+  procedure ClearVideosList;
+  var
+    Enumerator: TEnumerator<TSSVideo>;
+  begin
+    Enumerator := VideosAvailable.GetEnumerator;
+    while Enumerator.MoveNext do
+      Enumerator.Current.Free;
+    Enumerator.Free;
+    VideosAvailable.Clear;
+  end;
+
+begin
+  FreeAndNil(FObservers);
+  ClearVideosList;
+  FreeAndNil(FVideosAvailable);
+  inherited;
+end;
+
+function TSSYouTube.GetVideosList: String;
+var
+  Video: TSSVideo;
+begin
+  Result := 'YouTube Videos';
+  for Video in VideosAvailable do
+    Result := Result + IfThen(Trim(Result) <> '', sLineBreak+StringOfChar('=', 10)+sLineBreak, '') + Video.ToString;
+end;
+
+function TSSYouTube.AddVideo(const aVideo: TSSVideo): Boolean;
+begin
+  Result := not VideosAvailable.Contains(aVideo);
+  if Result then
+  begin
+    VideosAvailable.Add(aVideo);
+    FCurrentVideo          := aVideo;
+    FCurrentVideoOperation := voInsert;
+    NotifyObservers;
+  end;
+end;
+
+function TSSYouTube.RemoveVideo(const aVideo: TSSVideo): Boolean;
+begin
+  Result := VideosAvailable.Contains(aVideo);
+  if Result then
+  begin
+    VideosAvailable.Remove(aVideo);
+    FCurrentVideo          := aVideo;
+    FCurrentVideoOperation := voDelete;
+    NotifyObservers;
+  end;
+end;
+
+procedure TSSYouTube.NotifyObservers;
+var
+  Observer: ISSObserver;
+begin
+  for Observer in Observers do
+  begin
+    if CurrentVideo.VideoType in Observer.GetVideoTypePreferences then
+      Observer.Update(CurrentVideo, CurrentVideoOperation);
+  end;
+end;
+
+procedure TSSYouTube.RegisterObserver(aObs: ISSObserver);
+begin
+  if not Observers.Contains(aObs) then
+    Observers.Add(aObs);
+end;
+
+procedure TSSYouTube.UnregisterObserver(aObs: ISSObserver);
+begin
+  if Observers.Contains(aObs) then
+    Observers.Remove(aObs);
+end;
+
+{ TSSPerson }
+
+constructor TSSPerson.Create(aName: String; aVideoTypePreferences: TSSVideoTypes);
+begin
+  FName := AName;
+  FVideos := TList<TSSVideo>.Create;
+  FVideoTypePreferences := aVideoTypePreferences;
+end;
+
+destructor TSSPerson.Destroy;
+begin
+  FreeAndNil(FVideos);
+  inherited;
+end;
+
+function TSSPerson.GetVideosList: String;
+var
+  Video: TSSVideo;
+begin
+  Result := 'Videos of "'+Name+'"';
+  for Video in Videos do
+    Result := Result + IfThen(Trim(Result) <> '', sLineBreak+StringOfChar('=', 10)+sLineBreak, '') + Video.ToString;
+end;
+
+function TSSPerson.GetVideoTypePreferences: TSSVideoTypes;
+begin
+  Result := FVideoTypePreferences;
+end;
+
+procedure TSSPerson.Update(AVideo: TSSVideo;
+  aVideoOperation: TVideoOperation);
+begin
+  case aVideoOperation of
+    voInsert:
+      Videos.Add(AVideo);
+//    voUpdate: ;
+    voDelete:
+      Videos.Remove(AVideo);
+  end;
+
+end;
+
+{ TSSVideo }
+
+constructor TSSVideo.Create(aVideoName: String; aVideoType: TVideoType);
+begin
+  inherited Create;
+  FVideoName := aVideoName;
+  FVideoType := aVideoType;
+end;
+
+function TSSVideo.ToString: String;
+begin
+  Result := Format('Name: %s'+sLineBreak+
+                   'VideoType: %s',
+                   [VideoName, GetEnumName(TypeInfo(TVideoType), Ord(VideoType))]);
+end;
+
+end.

@@ -1,0 +1,175 @@
+unit Decorator.Classes.Example2;
+
+interface
+
+type
+  IEmployee = interface
+    ['{4858B23D-02ED-466D-BADB-478A69CFB6F6}']
+    function Join(aJoinDate: TDate): String;
+    function Terminate(aTerminateDate: TDate): String;
+    function GetName: String;
+    function GetSalary: Double;
+    property Name: String read GetName;
+    property Salary: Double read GetSalary;
+  end;
+
+  TEmployeeImpl = class(TInterfacedObject, IEmployee)
+  private
+    FName: String;
+  public
+    constructor Create(aName: String); reintroduce;
+    function Join(aJoinDate: TDate): String; virtual;
+    function Terminate(aTerminateDate: TDate): String; virtual;
+    function GetName: String; virtual;
+    function GetSalary: Double; virtual;
+  end;
+
+  TEmployeeDecorator = class abstract(TInterfacedObject, IEmployee)
+  private
+    FEmployee: IEmployee;
+  protected
+    function Join(aJoinDate: TDate): String; virtual;
+    function Terminate(aTerminateDate: TDate): String; virtual;
+    function GetName: String; virtual;
+    function GetSalary: Double; virtual;
+    property Employee: IEmployee read FEmployee;
+  public
+    constructor Create(aEmployee: IEmployee); reintroduce;
+  end;
+
+  TManager = class(TEmployeeDecorator)
+  protected
+    function GetSalary: Double; override;
+  public
+    function AssignTasks: String;
+    function ProfileEmployee: String;
+    function CreateRequirements: String;
+  end;
+
+  TTeamLead = class(TEmployeeDecorator)
+  protected
+    function GetSalary: Double; override;
+  public
+    function Planning: String;
+    function Motivate: String;
+  end;
+
+  TTeamMember = class(TEmployeeDecorator)
+  public
+    function PerformTask: String;
+    function CoordinateWithOthers: String;
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TEmployeeDecorator }
+
+constructor TEmployeeDecorator.Create(aEmployee: IEmployee);
+begin
+  inherited Create;
+  FEmployee := aEmployee;
+end;
+
+function TEmployeeDecorator.GetName: String;
+begin
+  Result := Employee.Name;
+end;
+
+function TEmployeeDecorator.GetSalary: Double;
+begin
+  Result := Employee.Salary;
+end;
+
+function TEmployeeDecorator.Join(aJoinDate: TDate): String;
+begin
+  Result := Employee.Join(aJoinDate);
+end;
+
+function TEmployeeDecorator.Terminate(aTerminateDate: TDate): String;
+begin
+  Result := Employee.Terminate(aTerminateDate);
+end;
+
+{ TEmployeeImpl }
+
+constructor TEmployeeImpl.Create(aName: String);
+begin
+  inherited Create;
+  FName := aName;
+end;
+
+function TEmployeeImpl.GetName: String;
+begin
+  Result := FName;
+end;
+
+function TEmployeeImpl.GetSalary: Double;
+begin
+  Result := 5000.00;
+end;
+
+function TEmployeeImpl.Join(aJoinDate: TDate): String;
+begin
+  Result := GetName + ' joined on ' + DateToStr(aJoinDate);
+end;
+
+function TEmployeeImpl.Terminate(aTerminateDate: TDate): String;
+begin
+  Result := GetName + ' terminate on ' + DateToStr(aTerminateDate);
+end;
+
+{ TManager }
+
+function TManager.AssignTasks: String;
+begin
+  Result := '[Manager] ' + Employee.Name + ' is assigning tasks.';
+end;
+
+function TManager.CreateRequirements: String;
+begin
+  Result := '[Manager] ' + Employee.Name + ' is creating requirement documents.';
+end;
+
+function TManager.GetSalary: Double;
+begin
+  Result := inherited + 5000.00;
+end;
+
+function TManager.ProfileEmployee: String;
+begin
+  Result := '[Manager] ' + Employee.Name + ' is profiling employees.';
+end;
+
+{ TTeamLead }
+
+function TTeamLead.GetSalary: Double;
+begin
+  Result := inherited + 3500.00;
+end;
+
+function TTeamLead.Motivate: String;
+begin
+  Result := '[Team Lead] ' + Employee.Name + ' is motivating his members.';
+end;
+
+function TTeamLead.Planning: String;
+begin
+  Result := '[Team Lead] ' + Employee.Name + ' is planning.';
+end;
+
+{ TTeamMember }
+
+function TTeamMember.CoordinateWithOthers: String;
+begin
+  Result := '[Team Member] ' + Employee.Name + ' is coordinating with other members of his team.';
+end;
+
+function TTeamMember.PerformTask: String;
+begin
+  Result := '[Team Member] ' + Employee.Name + ' is performing his assigned tasks.';
+end;
+
+end.

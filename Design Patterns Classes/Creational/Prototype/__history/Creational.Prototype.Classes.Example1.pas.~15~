@@ -1,0 +1,74 @@
+﻿unit Creational.Prototype.Classes.Example1;
+
+interface
+
+uses
+  System.Generics.Collections,
+  System.Generics.Defaults,
+  System.SysUtils,
+  System.Classes;
+
+type
+  ICloneableObject = interface
+    ['{1366973E-5765-4092-827A-E779C556965B}']
+    function GetClone: TInterfacedObject;
+  end;
+
+  TPersistentInterfacedObject = class(TPersistent)
+
+  end;
+
+  TJob = class(TInterfacedObject, ICloneableObject)
+  private
+    FName: String;
+    FDepartment: String;
+  public
+    constructor Create(aJobName, aJobDepartmentName: String); reintroduce;
+    function GetClone: TJob;
+  end;
+
+  TEmployee = class(TInterfacedObject, ICloneableObject)
+  private
+    FName: String;
+    FSurname: String;
+    FJob: TJob;
+  public
+    constructor Create(aFullname: String; aJob: TJob); reintroduce; overload;
+    constructor Create(aFullname, aJobName, aJobDepartmentName: String); reintroduce; overload;
+  end;
+
+implementation
+
+{ TEmployee }
+
+constructor TEmployee.Create(aFullname: String; aJob: TJob);
+begin
+  inherited Create;
+  FName    := aFullname.Split[0];
+  FSurname := aFullname.Split[1];
+  FJob     := aJob;
+end;
+
+constructor TEmployee.Create(aFullname, aJobName, aJobDepartmentName: String);
+begin
+  inherited Create;
+  FName    := aFullname.Split[0];
+  FSurname := aFullname.Split[1];
+  FJob     := TJob.Create(aJobName, aJobDepartmentName);
+end;
+
+{ TJob }
+
+constructor TJob.Create(aJobName, aJobDepartmentName: String);
+begin
+  inherited Create;
+  FName       := aJobName;
+  FDepartment := aJobDepartmentName;
+end;
+
+function TJob.GetClone: TJob;
+begin
+  Result := TJob.Create(Name, Department);
+end;
+
+end.

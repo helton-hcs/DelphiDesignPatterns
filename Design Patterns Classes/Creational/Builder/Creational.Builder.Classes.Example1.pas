@@ -1,0 +1,162 @@
+unit Creational.Builder.Classes.Example1;
+
+interface
+
+type
+  TMeal = class
+  private
+    FDrink: String;
+    FMainCourse: String;
+    FSide: String;
+  public
+    function ToString: String; override;
+    property Drink: String read FDrink write FDrink;
+    property MainCourse: String read FMainCourse write FMainCourse;
+    property Side: String read FSide write FSide;
+  end;
+
+  IMealBuilder = interface
+    ['{9B563583-F8AF-4E26-9F55-DF719F8F27EE}']
+    procedure BuildDrink;
+    procedure BuildMainCourse;
+    procedure BuildSide;
+    function GetMeal: TMeal;
+    property Meal: TMeal read GetMeal;
+  end;
+
+  TMealDirector = class
+  private
+    FMealBuilder: IMealBuilder;
+  public
+    constructor Create(aMealBuilder: IMealBuilder); reintroduce;
+    procedure ConstructMeal;
+    function GetMeal: TMeal;
+    property MealBuilder: IMealBuilder read FMealBuilder;
+  end;
+
+  TItalianMealBuilder = class(TInterfacedObject, IMealBuilder)
+  private
+    FMeal: TMeal;
+  protected
+    procedure BuildDrink;
+    procedure BuildMainCourse;
+    procedure BuildSide;
+    function GetMeal: TMeal;
+  public
+    constructor Create; reintroduce;
+    destructor Destroy; override;
+  end;
+
+  TJapaneseMealBuilder = class(TInterfacedObject, IMealBuilder)
+  private
+    FMeal: TMeal;
+  protected
+    procedure BuildDrink;
+    procedure BuildMainCourse;
+    procedure BuildSide;
+    function GetMeal: TMeal;
+  public
+    constructor Create; reintroduce;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+{ TMeal }
+
+function TMeal.ToString: String;
+begin
+  Result := 'Drink.....: ' + Drink + sLineBreak +
+            'MainCourse: ' + MainCourse + sLineBreak +
+            'Side......: ' + Side;
+end;
+
+{ TMealDirector }
+
+procedure TMealDirector.ConstructMeal;
+begin
+  MealBuilder.BuildDrink;
+  MealBuilder.BuildMainCourse;
+  MealBuilder.BuildSide;
+end;
+
+constructor TMealDirector.Create(aMealBuilder: IMealBuilder);
+begin
+  inherited Create;
+  FMealBuilder := aMealBuilder;
+end;
+
+function TMealDirector.GetMeal: TMeal;
+begin
+  Result := MealBuilder.GetMeal;
+end;
+
+{ TItalianBuilder }
+
+procedure TItalianMealBuilder.BuildDrink;
+begin
+  FMeal.Drink := 'Red Wine';
+end;
+
+procedure TItalianMealBuilder.BuildMainCourse;
+begin
+  FMeal.MainCourse := 'Pizza';
+end;
+
+procedure TItalianMealBuilder.BuildSide;
+begin
+  FMeal.Side := 'Bread';
+end;
+
+constructor TItalianMealBuilder.Create;
+begin
+  inherited;
+  FMeal := TMeal.Create;
+end;
+
+destructor TItalianMealBuilder.Destroy;
+begin
+  FMeal.Free;
+  inherited;
+end;
+
+function TItalianMealBuilder.GetMeal: TMeal;
+begin
+  Result := FMeal;
+end;
+
+{ TJapaneseBuilder }
+
+procedure TJapaneseMealBuilder.BuildDrink;
+begin
+  FMeal.Drink := 'Saque';
+end;
+
+procedure TJapaneseMealBuilder.BuildMainCourse;
+begin
+  FMeal.MainCourse := 'Chicken Teriyaki';
+end;
+
+procedure TJapaneseMealBuilder.BuildSide;
+begin
+  FMeal.Side := 'Miso Soup';
+end;
+
+constructor TJapaneseMealBuilder.Create;
+begin
+  inherited;
+  FMeal := TMeal.Create;
+end;
+
+destructor TJapaneseMealBuilder.Destroy;
+begin
+  FMeal.Free;
+  inherited;
+end;
+
+function TJapaneseMealBuilder.GetMeal: TMeal;
+begin
+  Result := FMeal;
+end;
+
+end.

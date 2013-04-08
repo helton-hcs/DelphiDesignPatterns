@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/03/12 13:45:28.000.653,C:\Users\Helton\Documents\Borland Studio Projects\IWTestCase1.pas=C:\Publico\Design Patterns\Source (Delphi)\Design Patterns Tests\DesignPatternsTests.pas</Transaction>
+    <Transaction>2013/03/12 13:45:36.000.872,C:\Users\Helton\Documents\Borland Studio Projects\Project1.dproj=C:\Publico\Design Patterns\Source (Delphi)\Design Patterns Tests\TestDesignPatterns.dproj</Transaction>
+    <Transaction>2013/03/12 13:46:15.000.103,=C:\Publico\Design Patterns\Source (Delphi)\Strategy\Strategy.Classes.pas</Transaction>
+    <Transaction>2013/03/12 13:55:16.000.177,=C:\Publico\Design Patterns\Source (Delphi)\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 13:55:27.000.663,C:\Publico\Design Patterns\Source (Delphi)\Design Patterns Tests\Unit1.pas=C:\Publico\Design Patterns\Source (Delphi)\Design Patterns Classes\Observer.Classes.pas</Transaction>
+    <Transaction>2013/03/12 19:33:13.000.996,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 19:33:29.000.687,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Factory.Classes.pas=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 19:33:33.000.060,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 19:33:44.000.829,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Singleton.Classes.pas=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 20:50:09.000.904,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/12 20:50:24.000.282,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\SmartPointer.pas=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/31 14:32:46.000.857,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/31 14:32:59.000.230,D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Decorator.Example1.pas</Transaction>
+    <Transaction>2013/03/31 15:08:34.000.776,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Decorator.Example1.pas=</Transaction>
+    <Transaction>2013/03/31 15:08:49.000.399,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Decorator.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 15:09:48.000.330,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Strategy.Classes.pas=</Transaction>
+    <Transaction>2013/03/31 15:09:49.000.938,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Singleton.Classes.pas=</Transaction>
+    <Transaction>2013/03/31 15:09:50.000.557,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Observer.Classes.pas=</Transaction>
+    <Transaction>2013/03/31 15:09:51.000.111,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Factory.Classes.pas=</Transaction>
+    <Transaction>2013/03/31 15:10:29.000.093,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Singleton.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 15:10:29.000.077,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Factory.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 15:10:29.000.800,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Strategy.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 15:10:29.000.085,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Observer.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 15:21:33.000.484,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/31 15:21:44.000.417,D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Decorator.Classes.Example2.pas</Transaction>
+    <Transaction>2013/03/31 18:20:08.000.785,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/31 18:20:29.000.570,D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational.Builder.Example3.pas</Transaction>
+    <Transaction>2013/03/31 18:20:47.000.405,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Decorator.Classes.Example2.pas=</Transaction>
+    <Transaction>2013/03/31 18:20:47.000.381,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Observer.Classes.Example1.pas=</Transaction>
+    <Transaction>2013/03/31 18:20:47.000.368,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Singleton.Classes.Example1.pas=</Transaction>
+    <Transaction>2013/03/31 18:20:47.000.356,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Strategy.Classes.Example1.pas=</Transaction>
+    <Transaction>2013/03/31 18:20:47.000.393,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Factory.Classes.Example1.pas=</Transaction>
+    <Transaction>2013/03/31 18:20:47.000.417,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Decorator.Classes.Example1.pas=</Transaction>
+    <Transaction>2013/03/31 18:25:13.000.101,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Structural\Decorator\Structural.Decorator.Classes.Example2.pas</Transaction>
+    <Transaction>2013/03/31 18:25:13.000.091,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational\Builder\Creational.Builder.Example3.pas</Transaction>
+    <Transaction>2013/03/31 18:25:13.000.136,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Behavioral\Observer\Behavioral.Observer.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 18:25:13.000.118,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Behavioral\Strategy\Behavioral.Strategy.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 18:25:13.000.145,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational\Factory\Creational.Factory.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 18:25:13.000.109,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Structural\Decorator\Structural.Decorator.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 18:25:13.000.127,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational\Singleton\Creational.Singleton.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 18:25:54.000.407,D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational\Builder\Creational.Builder.Example3.pas=</Transaction>
+    <Transaction>2013/03/31 18:26:14.000.180,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational\Builder\Creational.Builder.Classes.Example3.pas</Transaction>
+    <Transaction>2013/03/31 18:28:14.000.632,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational\Builder\Creational.Builder.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 18:58:21.000.568,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/31 18:58:44.000.740,D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas=D:\Dropbox\Projects\DesignPatterns\Design Patterns Classes\Creational\Prototype\Creational.Prototype.Classes.Example1.pas</Transaction>
+    <Transaction>2013/03/31 20:11:43.000.179,=D:\Dropbox\Projects\DesignPatterns\Utils\SmartPointer.Classes.pas</Transaction>
+    <Transaction>2013/03/31 20:11:51.000.056,=D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas</Transaction>
+    <Transaction>2013/03/31 20:12:04.000.854,D:\Dropbox\Projects\DesignPatterns\Design Patterns Tests\Unit1.pas=D:\Dropbox\Projects\DesignPatterns\Utils\ObjectHelper.Classes.pas</Transaction>
+  </Transactions>
+</BorlandProject>

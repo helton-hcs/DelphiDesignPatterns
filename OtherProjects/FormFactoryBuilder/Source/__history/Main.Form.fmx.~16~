@@ -1,0 +1,85 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Decorator Pattern'
+  ClientHeight = 190
+  ClientWidth = 227
+  Position = poScreenCenter
+  FormFactor.Width = 1366
+  FormFactor.Height = 768
+  FormFactor.Devices = [dkDesktop]
+  object BT_CreateCustomForm: TButton
+    DisableFocusEffect = False
+    Height = 22.000000000000000000
+    Position.X = 46.000000000000000000
+    Position.Y = 159.000000000000000000
+    Text = 'Create Custom Form!'
+    Width = 129.000000000000000000
+    OnClick = BT_CreateCustomFormClick
+  end
+  object GB_Options: TGroupBox
+    Height = 105.000000000000000000
+    Position.X = 32.000000000000000000
+    Position.Y = 8.000000000000000000
+    Text = 'Options'
+    Width = 169.000000000000000000
+    object LayoutOptions: TLayout
+      Align = alClient
+      Height = 83.000000000000000000
+      Padding.Left = 2.000000000000000000
+      Padding.Top = 20.000000000000000000
+      Padding.Right = 2.000000000000000000
+      Padding.Bottom = 2.000000000000000000
+      Position.X = 2.000000000000000000
+      Position.Y = 20.000000000000000000
+      Width = 165.000000000000000000
+      object CB_AddGreenBackground: TCheckBox
+        Align = alTop
+        DisableFocusEffect = False
+        Height = 19.000000000000000000
+        Text = 'Add Green Background'
+        Width = 165.000000000000000000
+      end
+      object CheckBox2: TCheckBox
+        Align = alTop
+        DisableFocusEffect = False
+        Height = 19.000000000000000000
+        Position.Y = 57.000000000000000000
+        Text = 'CheckBox1'
+        Width = 165.000000000000000000
+      end
+      object CheckBox3: TCheckBox
+        Align = alTop
+        DisableFocusEffect = False
+        Height = 19.000000000000000000
+        Position.Y = 38.000000000000000000
+        Text = 'Add a Button and an Edit'
+        Width = 165.000000000000000000
+      end
+      object CB_AddToolbar: TCheckBox
+        Align = alTop
+        DisableFocusEffect = False
+        Height = 19.000000000000000000
+        Position.Y = 19.000000000000000000
+        Text = 'Add Toolbar'
+        Width = 165.000000000000000000
+      end
+    end
+  end
+  object ED_FormCaption: TEdit
+    DisableFocusEffect = False
+    KeyboardType = vktDefault
+    Password = False
+    Position.X = 35.000000000000000000
+    Position.Y = 130.000000000000000000
+    Width = 168.000000000000000000
+    Height = 22.000000000000000000
+  end
+  object LB_Caption: TLabel
+    Height = 15.000000000000000000
+    Position.X = 33.000000000000000000
+    Position.Y = 116.000000000000000000
+    Text = 'Form caption'
+    Width = 120.000000000000000000
+  end
+end

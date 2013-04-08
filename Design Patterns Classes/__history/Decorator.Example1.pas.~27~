@@ -1,0 +1,82 @@
+﻿unit Decorator.Example1;
+
+interface
+
+uses
+  System.Generics.Defaults,
+  System.Generics.Collections;
+
+type
+  IPizza = interface
+    ['{8647AD34-9971-4A9B-BD96-0960A15C60D3}']
+    function GetDescription: String;
+    function GetCost: Double;
+  end;
+
+  TPlainPizza = class(TSingletonImplementation, IPizza)
+  private
+    FDescription: String;
+    FCost: Double;
+  protected
+    function GetDescription: String;
+    function GetCost: Double;
+  public
+    constructor Create(aDescription: String; aCost: Double); reintroduce;
+    property Description: String read GetDescription;
+    property Cost: Double read GetCost;
+  end;
+
+  TToppingPizza = class abstract(TSingletonImplementation, IPizza)
+  private
+    FTempPizza: IPizza;
+  protected
+    function GetDescription: String;
+    function GetCost: Double;
+    property TempPizza: IPizza read FTempPizza implements IPizza;
+  public
+    constructor Create(aNewPizza: IPizza); reintroduce;
+  end;
+
+  TMozzarella = class(TToppingDecorator)
+  end;
+
+implementation
+
+{ TPlainPizza }
+
+constructor TPlainPizza.Create(aDescription: String; aCost: Double);
+begin
+  inherited Create;
+  FDescription := aDescription;
+  FCost        := aCost;
+end;
+
+function TPlainPizza.GetCost: Double;
+begin
+  Result := FCost;
+end;
+
+function TPlainPizza.GetDescription: String;
+begin
+  Result := FDescription;
+end;
+
+{ TToppingPizza }
+
+constructor TToppingPizza.Create(aNewPizza: IPizza);
+begin
+  inherited Create;
+  FTempPizza := aNewPizza;
+end;
+
+function TToppingPizza.GetCost: Double;
+begin
+  Result := TempPizza.GetCost;
+end;
+
+function TToppingPizza.GetDescription: String;
+begin
+  Result := TempPizza.GetDescription;
+end;
+
+end.
