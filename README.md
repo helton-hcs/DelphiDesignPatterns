@@ -1,4 +1,4 @@
 DelphiDesignPatterns
 ====================
 
-Design Pattern in Delphi
+Design Patterns in Delphi
